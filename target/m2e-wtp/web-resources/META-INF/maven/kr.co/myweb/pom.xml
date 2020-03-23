@@ -2,23 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- maven dtd와 버전이 같아야함 -->
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>kr.co</groupId>
-	<artifactId>myweb</artifactId>
+	<groupId>com.myweb</groupId>
+	<artifactId>ctrl</artifactId>
 	<name>SpringBoard_01_Setting</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<!-- 배포 버전 -->
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>4.3.22.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.9.5</org.aspectj-version>
+		<org.aspectj-version>1.9.0</org.aspectj-version>
 		<org.log4j-version>2.11.2</org.log4j-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<spring.security-version>4.2.11.RELEASE</spring.security-version>
 		<org.quartz-version>2.3.2</org.quartz-version>
 		<fasterxml.jackson-version>2.10.0</fasterxml.jackson-version>
+
 	</properties>
+	<!-- 변수 -->
 	<dependencies>
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -58,6 +63,7 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -75,7 +81,6 @@
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${org.log4j-version}</version>
 			<exclusions>
-				<!-- Exclude Commons Logging in favor of log4j-core -->
 				<exclusion>
 					<groupId>org.apache.logging.log4j</groupId>
 					<artifactId>log4j-api</artifactId>
@@ -94,7 +99,6 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -144,7 +148,7 @@
 			<version>5.1.48</version>
 		</dependency>
 
-		<!-- Utils -->
+		<!-- Util -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -188,7 +192,6 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${spring.security-version}</version>
 		</dependency>
-
 		<!-- Scheduler -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -200,6 +203,8 @@
 			<artifactId>quartz-jobs</artifactId>
 			<version>${org.quartz-version}</version>
 		</dependency>
+
+
 	</dependencies>
 	<build>
 		<plugins>
