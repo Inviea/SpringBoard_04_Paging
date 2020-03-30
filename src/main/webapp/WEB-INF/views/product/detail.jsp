@@ -48,13 +48,17 @@
 		</c:choose>
 	</tr>
 	<tr>
-		<td colspan="2"><a href="/product/modify?pno=${pvo.pno }"
-			class="btn btn-outline-warning">수정</a>
+		<td colspan="2">
+			<a href="/product/list?pageNum=${cri.pageNum }&amount=${cri.amount }" class="btn btn-outline-secondary">목록</a>
+			<a href="/product/modify?pno=${pvo.pno }&pageNum=${cri.pageNum }&amount=${cri.amount }" class="btn btn-outline-warning">수정</a>
 			<button type="button" class="btn btn-outline-danger" id="rmBtn">삭제</button>
+			
 </table>
 <form action="/product/remove" method="post" id="rmForm">
-	<input type="hidden" name="imgfile" value="${pvo.imgfile }"> <input
-		type="hidden" name="pno" value="${pvo.pno }">
+	<input type="hidden" name="imgfile" value="${pvo.imgfile }"> 
+	<input type="hidden" name="pno" value="${pvo.pno }">
+	<input type="hidden" name="pageNum" value="<c:out value='${cri.pageNum }'/>">
+	<input type="hidden" name="amount" value="<c:out value='${cri.amount }'/>">
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>

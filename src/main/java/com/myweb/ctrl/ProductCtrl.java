@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,9 +58,10 @@ public class ProductCtrl {
 		model.addAttribute("pgvo", new PagingVO(totalCnt, cri));
 	}
 	@GetMapping({"/detail", "/modify"})
-	public void detail(@RequestParam("pno") int pno, Model model) {
+	public void detail(@RequestParam("pno") int pno, Model model,@ModelAttribute("cri")Criteria cri) {
 		log.info(">>>> 상세 페이지 출력 -get");
 		model.addAttribute("pvo", psv.detail(pno));
+		
 	}
 	/*@GetMapping("/modify")
 	public void modify(@RequestParam("pno") int pno, Model model) {
@@ -67,22 +69,25 @@ public class ProductCtrl {
 		model.addAttribute("pvo", psv.detail(pno));
 	}*/
 	@PostMapping("/modify")
-	public String modify(MultipartHttpServletRequest req, RedirectAttributes reAttr) throws IllegalStateException, IOException {
+	public String modify(MultipartHttpServletRequest req, RedirectAttributes reAttr,@ModelAttribute("cri")Criteria cri) throws IllegalStateException, IOException {
 		log.info(">>>>상품 수정 요청-POST");
 		psv.modify(fp.fileModify(req));
+		reAttr.addAttribute("pageNum", cri.getPageNum());
+		reAttr.addAttribute("amount", cri.getAmount());
 		reAttr.addFlashAttribute("result", "modify_ok");
 		return "redirect:/product/detail?pno="+req.getParameter("pno");
 	}
 	@PostMapping("/remove")
-	public String remove(@RequestParam("pno")int pno, @RequestParam("imgfile") String imgfile, RedirectAttributes reAttr) {
+	public String remove(@RequestParam("pno")int pno, @RequestParam("imgfile") String imgfile, RedirectAttributes reAttr,Criteria cri) {
 		log.info(">>>>상품 삭제-POST");
 		if(!imgfile.equals("NONE")) {
 			fp.fileRemove(imgfile);
 		}
 		psv.remove(pno);
+		reAttr.addAttribute("pageNum", cri.getPageNum());
+		reAttr.addAttribute("amount", cri.getAmount());
 		reAttr.addFlashAttribute("result", "remove_ok");
 		return "redirect:/product/list";
-		
 	}
 /*	@PostMapping("/rmimg")
 	public String removeImg(@RequestParam("pno") int pno, @RequestParam("imgfile") String imgfile, RedirectAttributes reAttr) {

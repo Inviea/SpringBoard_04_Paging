@@ -8,6 +8,8 @@
 <h2>상품 상세정보</h2>
 <form method="post" enctype="multipart/form-data">
 	<input type="hidden" name="imgfile" value="${pvo.imgfile }">
+	<input type="hidden" name="pageNum" value="${cri.pageNum }">
+	<input type="hidden" name="amount" value="${cri.amount }">
 	<table class="table table-bordered">
 		<tr>
 			<th>등록 번호</th>

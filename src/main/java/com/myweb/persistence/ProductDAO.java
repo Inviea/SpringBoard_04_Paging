@@ -15,4 +15,5 @@ public interface ProductDAO {
 	public void deleteImg(Integer pno);
 	public int selectOne();
 	
+	
 }

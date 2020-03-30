@@ -27,6 +27,23 @@ public class PagingVO {
 		//실제 가질수 있는 페이지의 번호보다 계산된 페이지 마지막 번호가 작으면 무조건 나옴
 		this.next = this.endPage<realEndPage;
 	}
+	public PagingVO(Criteria cri) {
+		this.cri = cri;
+		this.endPage = (int)(Math.ceil(cri.getPageNum()/10.0))*10;
+		// 끝-9=시작
+		this.startPage = endPage-9;
+		//DB에서 실제 글의 총개수를 가져와서 한페이지에 보여줄 글 수로 나누고 올림
+		int realEndPage = (int)(Math.ceil(totalCnt*1.0/cri.getAmount()));
+		//계산된 페이지의 마지막 번호는 실제 가질 수 있는 페이지의 최대 번호 보다 클 수 없음 
+		if(realEndPage<endPage) {
+			this.endPage= realEndPage;
+		}
+		//이전으로 가기 버튼은 시작 페이지 번호가 1일때보다 크면 무조건 나옴
+		this.prev = this.startPage>1;
+		//실제 가질수 있는 페이지의 번호보다 계산된 페이지 마지막 번호가 작으면 무조건 나옴
+		this.next = this.endPage<realEndPage;
+	}
+
 	public int getTotalCnt() {
 		return totalCnt;
 	}

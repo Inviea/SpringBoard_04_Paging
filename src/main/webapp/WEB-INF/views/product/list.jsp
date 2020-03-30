@@ -27,7 +27,7 @@
 				<c:forEach items="${list }" var="pvo">
 					<tr>
 						<td>${pvo.pno }</td>
-						<td><a href="/product/detail?pno=${pvo.pno }">${pvo.title }</a></td>
+						<td><a href="/product/detail?pno=${pvo.pno }&pageNum=${pgvo.cri.pageNum }&amount=${pgvo.cri.amount }">${pvo.title }</a></td>
 						<td>${pvo.writer }</td>
 						<td>${pvo.readcount }</td>
 						<td>${pvo.modd8 }</td>
